@@ -1,0 +1,2 @@
+3876720 3151862 1662796906842062825 3f21746a754a4ddd1ca5cd36c604d49c /home/ebisu/Documents/trying-stuff/ziggy/zig-cache/o/1e44c635747ae84ef3f9d9c3b50fa962/build.o
+62060 2973272 1662218634817560180 86e1debdb7b7d24613a6bb871e04b430 /home/ebisu/.cache/zig/o/904679befefff4f647f5f660effd30de/libcompiler_rt.a

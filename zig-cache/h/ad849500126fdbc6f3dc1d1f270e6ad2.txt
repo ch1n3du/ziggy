@@ -1,0 +1,2 @@
+906776 2424098 1661272369003891576 a3b3ab4d25957de75a11945093c3e95d /home/ebisu/Documents/trying-stuff/learning-zig/zig-cache/o/9eeb58555813a69ef2cdc3a523c6e0ec/learning-zig.o
+62060 2424078 1661263525911467061 ba38b2bcb995eecfbc262f05492af6fd /home/ebisu/.cache/zig/o/09b64a6af9f2e1f3361d8d8c093dffec/libcompiler_rt.a

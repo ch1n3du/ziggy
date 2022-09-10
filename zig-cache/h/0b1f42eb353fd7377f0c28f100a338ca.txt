@@ -1,0 +1,2 @@
+3876736 2377354 1660989647690145788 8eae1db2f1443da3bf6508bf4e1a3485 /home/ebisu/Documents/trying-stuff/learning-zig/zig-cache/o/8fefda11fb6b5e1892b6968156c4b0e6/build.o
+62060 2372351 1660982619540155048 158e07ed04eac973868d9949b22104ed /home/ebisu/.cache/zig/o/0a3f8b81049a427618dd7f6f17e2db5a/libcompiler_rt.a

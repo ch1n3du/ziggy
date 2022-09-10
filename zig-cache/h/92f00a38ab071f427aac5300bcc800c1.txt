@@ -1,0 +1,2 @@
+1135528 2974602 1662219320649226444 bd2472840a94b0b0e065e7e905e39205 /home/ebisu/Documents/trying-stuff/learning-zig/zig-cache/o/5608cc967d78bf69cc5da92b6740364a/learning-zig.o
+62060 2973272 1662218634817560180 86e1debdb7b7d24613a6bb871e04b430 /home/ebisu/.cache/zig/o/904679befefff4f647f5f660effd30de/libcompiler_rt.a

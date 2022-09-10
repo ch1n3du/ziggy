@@ -1,0 +1,2 @@
+861416 3163414 1657268789993852072 caa05f7b6cd4b3bdffe62f4941eb35e8 /home/radio-knight/Documents/trying-stuff/learning-zig/zig-cache/o/dc225ff30a0082b0f5e819fffcb97158/learning-zig.o
+62066 3162332 1657267137866783952 e7070bec2762a967ddf05f057b9c2c60 /home/radio-knight/.cache/zig/o/5c3104cfaf09c03409645959abfe305e/libcompiler_rt.a

@@ -1,0 +1,2 @@
+3876752 3163405 1657268789352853215 c972ed4d82fb2ecb50c97cfef9798ad3 /home/radio-knight/Documents/trying-stuff/learning-zig/zig-cache/o/5f6fe91b2ab41de936a50a2b1c807dae/build.o
+62066 3162332 1657267137866783952 e7070bec2762a967ddf05f057b9c2c60 /home/radio-knight/.cache/zig/o/5c3104cfaf09c03409645959abfe305e/libcompiler_rt.a
