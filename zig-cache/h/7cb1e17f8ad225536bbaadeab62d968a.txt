@@ -1,2 +1,2 @@
-1144704 3151871 1662796907653061057 70fcdcd9018d11ce5ae91d8e0686e51a /home/ebisu/Documents/trying-stuff/ziggy/zig-cache/o/8b6b0a85ccc759147bd3eb01e46f0e3e/ziggy.o
+1144688 3151871 1662907577145964226 0f82bfd7bd511b62a3ba71e642232395 /home/ebisu/Documents/trying-stuff/ziggy/zig-cache/o/8b6b0a85ccc759147bd3eb01e46f0e3e/ziggy.o
 62060 2973272 1662218634817560180 86e1debdb7b7d24613a6bb871e04b430 /home/ebisu/.cache/zig/o/904679befefff4f647f5f660effd30de/libcompiler_rt.a

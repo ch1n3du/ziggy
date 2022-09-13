@@ -1,7 +1,7 @@
-548 50728 1662219318880261759 a355d2b42a086a0a9683481f2110be39 /home/ebisu/Documents/trying-stuff/ziggy/src/main.zig
+611 50728 1662798975666931275 895e3cf9bb9bd8d9660b51839fb56c81 /home/ebisu/Documents/trying-stuff/ziggy/src/main.zig
 3241 3151869 1662796906966062554 db745b0438adfc2d7af00c49ad71d945 /home/ebisu/Documents/trying-stuff/ziggy/zig-cache/o/8b6b0a85ccc759147bd3eb01e46f0e3e/builtin.zig
 5391 11802495 1644868999000000000 99c935b1fadc1095742d1049c16b1f73 /usr/lib/zig/std/std.zig
-548 50728 1662219318880261759 a355d2b42a086a0a9683481f2110be39 /home/ebisu/Documents/trying-stuff/ziggy/src/main.zig
+611 50728 1662798975666931275 895e3cf9bb9bd8d9660b51839fb56c81 /home/ebisu/Documents/trying-stuff/ziggy/src/main.zig
 5391 11802495 1644868999000000000 99c935b1fadc1095742d1049c16b1f73 /usr/lib/zig/std/std.zig
 26206 11801956 1644868999000000000 dbc4cb0419e16d4a31e572375da82b3e /usr/lib/zig/std/builtin.zig
 21855 11802493 1644868999000000000 afc30f6da0dcf13f4d3062af48b3ac43 /usr/lib/zig/std/start.zig
@@ -58,7 +58,7 @@
 5076 2377432 1661272270929265830 a99cab302c4e69f4f57ab37378294b63 /home/ebisu/Documents/trying-stuff/ziggy/src/scanner.zig
 579 2377403 1661259469348137113 c2612a8d00254892aed5add02291fcb7 /home/ebisu/Documents/trying-stuff/ziggy/src/token.zig
 85 2377439 1661254621106290263 ca28fd3307995ee26a01776532ea81c6 /home/ebisu/Documents/trying-stuff/ziggy/src/token_type.zig
-4121 2428103 1662219627821344552 29155f0f2af524cc7eeebc4ae0bcb06e /home/ebisu/Documents/trying-stuff/ziggy/src/parser.zig
+3883 2428103 1662907357374625932 e6d3aeb27452fea6b7413cbd81414724 /home/ebisu/Documents/trying-stuff/ziggy/src/parser.zig
 1447 11802197 1644868999000000000 40a5f42bd360eeafb9fe43957e8a5b42 /usr/lib/zig/std/math/signbit.zig
 800 11802183 1644868999000000000 ab41e71339ff07e47f6edb422a347b91 /usr/lib/zig/std/math/isnan.zig
 4266 11802182 1644868999000000000 c52df6d29818c1f364f19266b7598c5a /usr/lib/zig/std/math/isinf.zig

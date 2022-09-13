@@ -15,21 +15,10 @@ const ExprTag = enum {
     Number,
 };
 
-const UnaryExpr = struct {
-    op: TokenType,
-    rhs: *Expr,
-};
-
-const BinaryExpr = struct {
-    lhs: *Expr,
-    op: TokenType,
-    rhs: *Expr,
-};
-
-const Expr = union(ExprTag) {
+const Expr = union(enum) {
     Number: f64,
-    Unary: UnaryExpr,
-    Binary: BinaryExpr,
+    Unary: struct { op: TokenType, rhs: *Expr },
+    Binary: struct { lhs: *Expr, op: TokenType, rhs: *Expr },
 };
 
 pub const Parser = struct {
@@ -115,10 +104,8 @@ pub const Parser = struct {
     fn unary(self: *Parser) ParserError!Expr {
         if (self.match(TokenType.Minus)) {
             var rhs: Expr = try self.unary();
-            var unary_expr = UnaryExpr{ .op = self.previous.?, .rhs = rhs };
-
-            print("Unary worked: {s},", .{unary_expr});
-            return Expr{ .Unary = &unary_expr };
+            // print("Unary worked: {s},", .{unary_expr});
+            return Expr{ .Unary = .{ .op = TokenType.Minus, .rhs = &rhs } };
         } else {
             return self.number();
         }
@@ -131,8 +118,7 @@ pub const Parser = struct {
         while (self.match(TokenType.Slash) or self.match(TokenType.Star)) {
             var op = self.previous().token_type;
             var rhs: Expr = try self.factor();
-            var bin_expr = BinaryExpr{ .lhs = &expr, .op = op, .rhs = &rhs };
-            expr = Expr{ .Binary = bin_expr };
+            expr = Expr{ .Binary = .{ .lhs = &expr, .op = op, .rhs = &rhs } };
         }
 
         print("Factor worked: {s},", .{expr});
@@ -146,8 +132,7 @@ pub const Parser = struct {
         while (self.match(TokenType.Minus) or self.match(TokenType.Plus)) {
             var op = self.previous().token_type;
             var rhs: Expr = try self.factor();
-            var bin_expr: BinaryExpr = BinaryExpr{ .lhs = &expr, .op = op, .rhs = &rhs };
-            expr = Expr{ .Binary = bin_expr };
+            expr = Expr{ .Binary = .{ .lhs = &expr, .op = op, .rhs = &rhs } };
         }
 
         print("Factor worked: {s},", .{expr});
