@@ -1,0 +1,2 @@
+1125968 3239607 1663076569134500775 eecf2217d032b3524b42b5df9ceb4cd7 /home/ebisu/Documents/trying-stuff/ziggy/zig-cache/o/3d9b7a7f66a6a1efaa4a2c39a46704bd/ziggy.o
+62060 3239587 1663071450594273560 f716ebc3c47a4bdf1a34e25c85ababec /home/ebisu/.cache/zig/o/14ec7e1a5689d0c9c57e92dd0bdd3475/libcompiler_rt.a

@@ -5,11 +5,11 @@ const panic = std.debug.panic;
 const ArrayList = std.ArrayList;
 const allocator = std.heap.page_allocator;
 
-const TokenType = @import("token_type.zig").TokenType;
 const Token = @import("token.zig").Token;
+const TokenType = @import("token.zig").TokenType;
 const Position = @import("token.zig").Position;
 
-const ScannerError = error {
+const ScannerError = error{
     ExpectedNumber,
 };
 
@@ -22,13 +22,13 @@ pub const Scanner = struct {
     column: usize,
 
     pub fn new(source: []const u8) Scanner {
-        return Scanner {
+        return Scanner{
             .source = source,
             .tokens = ArrayList(Token).init(allocator),
             .start = 0,
             .current = 0,
             .line = 0,
-            .column = 9, 
+            .column = 9,
         };
     }
 
@@ -46,16 +46,16 @@ pub const Scanner = struct {
     }
 
     fn check(self: *Scanner, expected: u8) bool {
-        return if (self.is_at_end()) 
+        return if (self.is_at_end())
             false
-        else 
+        else
             self.source[self.current] == expected;
     }
 
     fn peek(self: *Scanner) ?u8 {
         return if (self.is_at_end())
             null
-        else 
+        else
             self.source[self.current];
     }
 
@@ -90,17 +90,19 @@ pub const Scanner = struct {
         var lexy = self.peek() orelse 2;
 
         while (!self.is_at_end() and is_numeric(lexy)) {
-            var lex = self.advance();
-            print("Scanning: '{c}'\n", .{lex});
+            _ = self.advance();
+            // var lex = self.advance();
+            // print("Scanning: '{c}'\n", .{lex});
             lexy = self.peek() orelse 2;
         }
 
         if (self.match('.')) {
-            print("Scanning: '.'", .{});
+            // print("Scanning: '.'", .{});
             lexy = self.peek() orelse 2;
             while (!self.is_at_end() and is_numeric(lexy)) {
-                var lex = self.advance();
-                print("Scanning: '{c}'\n", .{lex});
+                _ = self.advance();
+                // var lex = self.advance();
+                // print("Scanning: '{c}'\n", .{lex});
                 lexy = self.peek() orelse 2;
             }
         }
@@ -110,14 +112,14 @@ pub const Scanner = struct {
 
     fn scan_token(self: *Scanner) ?Token {
         var lexy = self.advance() orelse return null;
-        print("Scanning: '{c}'\n", .{lexy});
+        // print("Scanning: '{c}'\n", .{lexy});
         var token: ?Token = null;
 
         token = switch (lexy) {
-            '+'  => self.get_token(TokenType.Plus),
-            '-'  => self.get_token(TokenType.Minus),
-            '/'  => self.get_token(TokenType.Slash),
-            '*'  => self.get_token(TokenType.Star),
+            '+' => self.get_token(TokenType.Plus),
+            '-' => self.get_token(TokenType.Minus),
+            '/' => self.get_token(TokenType.Slash),
+            '*' => self.get_token(TokenType.Star),
             '\n' => {
                 self.line += 1;
                 return null;
@@ -127,7 +129,7 @@ pub const Scanner = struct {
                     return self.scan_number();
                 } else {
                     return null;
-                } 
+                }
             },
         };
 
@@ -141,9 +143,8 @@ pub const Scanner = struct {
             self.start = self.current;
             var token_: ?Token = self.scan_token();
             if (token_) |value| {
-                print("Got a token: '{s}' \n", .{value.lexeme});
                 tokens.append(value) catch {};
-            } else { 
+            } else {
                 continue;
             }
         }
@@ -156,7 +157,7 @@ fn is_numeric(c: u8) bool {
     return (c > 47) and (c < 58);
 }
 
-fn is_upper(c: u8) bool  {
+fn is_upper(c: u8) bool {
     return (c > 64) and (c < 91);
 }
 
@@ -182,21 +183,20 @@ test "Advance works" {
     try expect(scanny.scan_tokens().items.len == 3);
 }
 
-
 test "Alphabetic predicates work" {
     const lowers = "abcdefghijklmnopqrstuvwxyz";
     const uppers = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const numerics = "1234567890";
 
-    for (lowers) | char | {
+    for (lowers) |char| {
         try expect(is_lower(char));
     }
 
-    for (uppers) | char | {
+    for (uppers) |char| {
         try expect(is_upper(char));
     }
 
-    for (numerics) | char | {
+    for (numerics) |char| {
         try expect(is_numeric(char));
     }
 }

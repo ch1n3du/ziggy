@@ -5,20 +5,15 @@ const todo = std.debug.todo;
 const allocator = std.heap.page_allocator;
 const ArrayList = std.ArrayList;
 
-const TokenType = @import("token_type.zig").TokenType;
 const Token = @import("token.zig").Token;
+const TokenType = @import("token.zig").TokenType;
 const Position = @import("token.zig").Position;
+const Expr = @import("expr.zig").Expr;
 
 const ExprTag = enum {
     Binary,
     Unary,
     Number,
-};
-
-const Expr = union(enum) {
-    Number: f64,
-    Unary: struct { op: TokenType, rhs: *Expr },
-    Binary: struct { lhs: *Expr, op: TokenType, rhs: *Expr },
 };
 
 pub const Parser = struct {
@@ -40,10 +35,6 @@ pub const Parser = struct {
 
     fn is_at_end(self: *Parser) bool {
         return self.current >= self.source.items.len;
-    }
-
-    fn get_position(self: *Parser) Position {
-        return Position.new(self.line, self.column);
     }
 
     fn increment_current(self: *Parser) void {
@@ -89,11 +80,10 @@ pub const Parser = struct {
 
     // add_or_
     // NUMBER -> NUMBER
-    fn number(self: *Parser) ParserError!Expr {
+    fn number(self: *Parser) anyerror!Expr {
         if (self.match(TokenType.Number)) {
-            var num: f64 = parseFloat(f64, self.previous().lexeme);
+            var num: f64 = try parseFloat(f64, self.previous().lexeme);
 
-            print("Number worked: {s},", .{num});
             return Expr{ .Number = num };
         }
 
@@ -101,41 +91,51 @@ pub const Parser = struct {
     }
 
     // unary -> "-" unary | NUMBER ;
-    fn unary(self: *Parser) ParserError!Expr {
+    fn unary(self: *Parser) anyerror!Expr {
         if (self.match(TokenType.Minus)) {
-            var rhs: Expr = try self.unary();
-            // print("Unary worked: {s},", .{unary_expr});
-            return Expr{ .Unary = .{ .op = TokenType.Minus, .rhs = &rhs } };
+            var rhs: *Expr = try allocator.create(Expr);
+            rhs.* = try self.unary();
+            return Expr{ .Unary = .{ .op = TokenType.Minus, .rhs = rhs } };
         } else {
             return self.number();
         }
     }
 
-    // factor -> factor ("/" | "*") NUMBER | NUMBER ;
-    fn factor(self: *Parser) ParserError!Expr {
-        var expr: Expr = try self.factor();
+    // factor -> unary (("/" | "*") NUMBER)* ;
+    fn factor(self: *Parser) anyerror!Expr {
+        var expr: Expr = try self.unary();
 
         while (self.match(TokenType.Slash) or self.match(TokenType.Star)) {
+            var lhs: *Expr = try allocator.create(Expr);
+            lhs.* = expr;
+
             var op = self.previous().token_type;
-            var rhs: Expr = try self.factor();
-            expr = Expr{ .Binary = .{ .lhs = &expr, .op = op, .rhs = &rhs } };
+
+            var rhs: *Expr = try allocator.create(Expr);
+            rhs.* = try self.number();
+
+            expr = Expr{ .Binary = .{ .lhs = lhs, .op = op, .rhs = rhs } };
         }
 
-        print("Factor worked: {s},", .{expr});
         return expr;
     }
 
     // term -> factor (("-" | "+") factor)* ;
-    pub fn term(self: *Parser) ParserError!Expr {
+    pub fn term(self: *Parser) anyerror!Expr {
         var expr: Expr = try self.factor();
 
         while (self.match(TokenType.Minus) or self.match(TokenType.Plus)) {
+            var lhs: *Expr = try allocator.create(Expr);
+            lhs.* = expr;
+
             var op = self.previous().token_type;
-            var rhs: Expr = try self.factor();
-            expr = Expr{ .Binary = .{ .lhs = &expr, .op = op, .rhs = &rhs } };
+
+            var rhs: *Expr = try allocator.create(Expr);
+            rhs.* = try self.factor();
+
+            expr = Expr{ .Binary = .{ .lhs = lhs, .op = op, .rhs = rhs } };
         }
 
-        print("Factor worked: {s},", .{expr});
         return expr;
     }
 };
